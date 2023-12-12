@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Absolute<T extends number | string | bigint> = any
 
 
 /* Write your code above */
@@ -11,9 +11,14 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Absolute<0>, '0'>>,
+  Expect<Equal<Absolute<-0>, '0'>>,
+  Expect<Equal<Absolute<10>, '10'>>,
+  Expect<Equal<Absolute<-5>, '5'>>,
+  Expect<Equal<Absolute<'0'>, '0'>>,
+  Expect<Equal<Absolute<'-0'>, '0'>>,
+  Expect<Equal<Absolute<'10'>, '10'>>,
+  Expect<Equal<Absolute<'-5'>, '5'>>,
+  Expect<Equal<Absolute<-1_000_000n>, '1000000'>>,
+  Expect<Equal<Absolute<9_999n>, '9999'>>,
 ]
