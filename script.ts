@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Camelize<T> = any
 
 
 /* Write your code above */
@@ -11,9 +11,24 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<
+    Camelize<{
+      some_prop: string
+      prop: { another_prop: string }
+      array: [
+        { snake_case: string },
+        { another_element: { yet_another_prop: string } },
+        { yet_another_element: string },
+      ]
+    }>,
+    {
+      someProp: string
+      prop: { anotherProp: string }
+      array: [
+        { snakeCase: string },
+        { anotherElement: { yetAnotherProp: string } },
+        { yetAnotherElement: string },
+      ]
+    }
+  >>,
 ]
