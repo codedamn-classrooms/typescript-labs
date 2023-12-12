@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type MyPick<T, K> = any
 
 
 /* Write your code above */
@@ -11,9 +11,23 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Expected1, MyPick<Todo, 'title'>>>,
+  Expect<Equal<Expected2, MyPick<Todo, 'title' | 'completed'>>>,
+  // @ts-expect-error
+  MyPick<Todo, 'title' | 'completed' | 'invalid'>,
 ]
+
+interface Todo {
+  title: string
+  description: string
+  completed: boolean
+}
+
+interface Expected1 {
+  title: string
+}
+
+interface Expected2 {
+  title: string
+  completed: boolean
+}
