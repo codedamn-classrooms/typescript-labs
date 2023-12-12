@@ -1,6 +1,9 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Chainable = {
+  option(key: string, value: any): any
+  get(): any
+}
 
 
 /* Write your code above */
@@ -8,12 +11,46 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Alike, Expect } from '@type-challenges/utils'
+
+declare const a: Chainable
+
+const result1 = a
+  .option('foo', 123)
+  .option('bar', { value: 'Hello World' })
+  .option('name', 'type-challenges')
+  .get()
+
+const result2 = a
+  .option('name', 'another name')
+  // @ts-expect-error
+  .option('name', 'last name')
+  .get()
+
+const result3 = a
+  .option('name', 'another name')
+  // @ts-expect-error
+  .option('name', 123)
+  .get()
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Alike<typeof result1, Expected1>>,
+  Expect<Alike<typeof result2, Expected2>>,
+  Expect<Alike<typeof result3, Expected3>>,
 ]
+
+type Expected1 = {
+  foo: number
+  bar: {
+    value: string
+  }
+  name: string
+}
+
+type Expected2 = {
+  name: string
+}
+
+type Expected3 = {
+  name: number
+}
