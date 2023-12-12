@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type TwoSum<T extends number[], U extends number> = any
 
 
 /* Write your code above */
@@ -11,9 +11,16 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<TwoSum<[3, 3], 6>, true>>,
+  Expect<Equal<TwoSum<[3, 2, 4], 6>, true>>,
+  Expect<Equal<TwoSum<[2, 7, 11, 15], 15>, false>>,
+  Expect<Equal<TwoSum<[2, 7, 11, 15], 9>, true>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 0>, false>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 1>, false>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 2>, false>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 3>, true>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 4>, true>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 5>, true>>,
+  Expect<Equal<TwoSum<[1, 2, 3], 6>, false>>,
+  Expect<Equal<TwoSum<[3, 2, 0], 2>, true>>,
 ]
