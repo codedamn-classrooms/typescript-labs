@@ -1,6 +1,16 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type ControlsMap = {
+  c: 'char'
+  s: 'string'
+  d: 'dec'
+  o: 'oct'
+  h: 'hex'
+  f: 'float'
+  p: 'pointer'
+}
+
+type ParsePrintFormat = any
 
 
 /* Write your code above */
@@ -11,9 +21,14 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<ParsePrintFormat<''>, []>>,
+  Expect<Equal<ParsePrintFormat<'Any string.'>, []>>,
+  Expect<Equal<ParsePrintFormat<'The result is %d.'>, ['dec']>>,
+  Expect<Equal<ParsePrintFormat<'The result is %%d.'>, []>>,
+  Expect<Equal<ParsePrintFormat<'The result is %%%d.'>, ['dec']>>,
+  Expect<Equal<ParsePrintFormat<'The result is %f.'>, ['float']>>,
+  Expect<Equal<ParsePrintFormat<'The result is %h.'>, ['hex']>>,
+  Expect<Equal<ParsePrintFormat<'The result is %q.'>, []>>,
+  Expect<Equal<ParsePrintFormat<'Hello %s: score is %d.'>, ['string', 'dec']>>,
+  Expect<Equal<ParsePrintFormat<'The result is %'>, []>>,
 ]
