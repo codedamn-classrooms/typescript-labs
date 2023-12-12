@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type KebabCase<S> = any
 
 
 /* Write your code above */
@@ -11,9 +11,13 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<KebabCase<'FooBarBaz'>, 'foo-bar-baz'>>,
+  Expect<Equal<KebabCase<'fooBarBaz'>, 'foo-bar-baz'>>,
+  Expect<Equal<KebabCase<'foo-bar'>, 'foo-bar'>>,
+  Expect<Equal<KebabCase<'foo_bar'>, 'foo_bar'>>,
+  Expect<Equal<KebabCase<'Foo-Bar'>, 'foo--bar'>>,
+  Expect<Equal<KebabCase<'ABC'>, 'a-b-c'>>,
+  Expect<Equal<KebabCase<'-'>, '-'>>,
+  Expect<Equal<KebabCase<''>, ''>>,
+  Expect<Equal<KebabCase<'😎'>, '😎'>>,
 ]
