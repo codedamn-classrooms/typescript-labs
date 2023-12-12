@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type All = any
 
 
 /* Write your code above */
@@ -11,9 +11,19 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<All<[1, 1, 1], 1>, true>>,
+  Expect<Equal<All<[1, 1, 2], 1>, false>>,
+  Expect<Equal<All<['1', '1', '1'], '1'>, true>>,
+  Expect<Equal<All<['1', '1', '1'], 1>, false>>,
+  Expect<Equal<All<[number, number, number], number>, true>>,
+  Expect<Equal<All<[number, number, string], number>, false>>,
+  Expect<Equal<All<[null, null, null], null>, true>>,
+  Expect<Equal<All<[[1], [1], [1]], [1]>, true>>,
+  Expect<Equal<All<[{}, {}, {}], {}>, true>>,
+  Expect<Equal<All<[never], never>, true>>,
+  Expect<Equal<All<[any], any>, true>>,
+  Expect<Equal<All<[unknown], unknown>, true>>,
+  Expect<Equal<All<[any], unknown>, false>>,
+  Expect<Equal<All<[unknown], any>, false>>,
+  Expect<Equal<All<[1, 1, 2], 1 | 2>, false>>,
 ]
