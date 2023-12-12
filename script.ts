@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+declare function PromiseAll(values: any): any
 
 
 /* Write your code above */
@@ -10,10 +10,14 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+const promiseAllTest1 = PromiseAll([1, 2, 3] as const)
+const promiseAllTest2 = PromiseAll([1, 2, Promise.resolve(3)] as const)
+const promiseAllTest3 = PromiseAll([1, 2, Promise.resolve(3)])
+const promiseAllTest4 = PromiseAll<Array<number | Promise<number>>>([1, 2, 3])
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<typeof promiseAllTest1, Promise<[1, 2, 3]>>>,
+  Expect<Equal<typeof promiseAllTest2, Promise<[1, 2, number]>>>,
+  Expect<Equal<typeof promiseAllTest3, Promise<[number, number, number]>>>,
+  Expect<Equal<typeof promiseAllTest4, Promise<number[]>>>,
 ]
