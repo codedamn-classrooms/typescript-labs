@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type FlipArguments<T> = any
 
 
 /* Write your code above */
@@ -11,9 +11,18 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<FlipArguments<() => boolean>, () => boolean>>,
+  Expect<Equal<FlipArguments<(foo: string) => number>, (foo: string) => number>>,
+  Expect<Equal<FlipArguments<(arg0: string, arg1: number, arg2: boolean) => void>, (arg0: boolean, arg1: number, arg2: string) => void>>,
+]
+
+type errors = [
+  // @ts-expect-error
+  FlipArguments<'string'>,
+  // @ts-expect-error
+  FlipArguments<{ key: 'value' }>,
+  // @ts-expect-error
+  FlipArguments<['apple', 'banana', 100, { a: 1 }]>,
+  // @ts-expect-error
+  FlipArguments<null | undefined>,
 ]
