@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+declare function join(delimiter: any): (...parts: any[]) => any
 
 
 /* Write your code above */
@@ -10,10 +10,23 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+// Edge cases
+const noCharsOutput = join('-')()
+const oneCharOutput = join('-')('a')
+const noDelimiterOutput = join('')('a', 'b', 'c')
+
+// Regular cases
+const hyphenOutput = join('-')('a', 'b', 'c')
+const hashOutput = join('#')('a', 'b', 'c')
+const twoCharOutput = join('-')('a', 'b')
+const longOutput = join('-')('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<typeof noCharsOutput, ''>>,
+  Expect<Equal<typeof oneCharOutput, 'a'>>,
+  Expect<Equal<typeof noDelimiterOutput, 'abc'>>,
+  Expect<Equal<typeof twoCharOutput, 'a-b'>>,
+  Expect<Equal<typeof hyphenOutput, 'a-b-c'>>,
+  Expect<Equal<typeof hashOutput, 'a#b#c'>>,
+  Expect<Equal<typeof longOutput, 'a-b-c-d-e-f-g-h'>>,
 ]
