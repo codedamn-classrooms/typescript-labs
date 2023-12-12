@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type LengthOfString<S extends string> = number
 
 
 /* Write your code above */
@@ -8,12 +8,33 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, IsTrue } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  IsTrue<Equal<LengthOfString<''>, 0>>,
+  IsTrue<Equal<LengthOfString<'1'>, 1>>,
+  IsTrue<Equal<LengthOfString<'12'>, 2>>,
+  IsTrue<Equal<LengthOfString<'123'>, 3>>,
+  IsTrue<Equal<LengthOfString<'1234'>, 4>>,
+  IsTrue<Equal<LengthOfString<'12345'>, 5>>,
+  IsTrue<Equal<LengthOfString<'123456'>, 6>>,
+  IsTrue<Equal<LengthOfString<'1234567'>, 7>>,
+  IsTrue<Equal<LengthOfString<'12345678'>, 8>>,
+  IsTrue<Equal<LengthOfString<'123456789'>, 9>>,
+  IsTrue<Equal<LengthOfString<'1234567890'>, 10>>,
+  IsTrue<Equal<LengthOfString<'12345678901'>, 11>>,
+  IsTrue<Equal<LengthOfString<'123456789012'>, 12>>,
+  IsTrue<Equal<LengthOfString<'1234567890123'>, 13>>,
+  IsTrue<Equal<LengthOfString<'12345678901234'>, 14>>,
+  IsTrue<Equal<LengthOfString<'123456789012345'>, 15>>,
+  IsTrue<Equal<LengthOfString<'1234567890123456'>, 16>>,
+  IsTrue<Equal<LengthOfString<'12345678901234567'>, 17>>,
+  IsTrue<Equal<LengthOfString<'123456789012345678'>, 18>>,
+  IsTrue<Equal<LengthOfString<'1234567890123456789'>, 19>>,
+  IsTrue<Equal<LengthOfString<'12345678901234567890'>, 20>>,
+  IsTrue<Equal<LengthOfString<'123456789012345678901'>, 21>>,
+  IsTrue<Equal<LengthOfString<'1234567890123456789012'>, 22>>,
+  IsTrue<Equal<LengthOfString<'12345678901234567890123'>, 23>>,
+  IsTrue<Equal<LengthOfString<'aaaaaaaaaaaaggggggggggggggggggggkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'>, 272>>,
+  IsTrue<Equal<LengthOfString<'000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'>, 999>>,
 ]
