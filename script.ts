@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type PublicType<T extends object> = any
 
 
 /* Write your code above */
@@ -11,9 +11,11 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<PublicType<{ a: number }>, { a: number }>>,
+  Expect<Equal<PublicType<{ _b: string | bigint }>, {}>>,
+  Expect<Equal<PublicType<{ readonly c?: number }>, { readonly c?: number }>>,
+  Expect<Equal<PublicType<{ d: string; _e: string }>, { d: string }>>,
+  Expect<Equal<PublicType<{ _f: () => bigint[] }>, {}>>,
+  Expect<Equal<PublicType<{ g: '_g' }>, { g: '_g' }>>,
+  Expect<Equal<PublicType<{ __h: number; i: unknown }>, { i: unknown }>>,
 ]
