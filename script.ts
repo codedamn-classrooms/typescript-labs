@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type RequiredByKeys<T, K> = any
 
 
 /* Write your code above */
@@ -10,10 +10,28 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+interface User {
+  name?: string
+  age?: number
+  address?: string
+}
+
+interface UserRequiredName {
+  name: string
+  age?: number
+  address?: string
+}
+
+interface UserRequiredNameAndAge {
+  name: string
+  age: number
+  address?: string
+}
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<RequiredByKeys<User, 'name'>, UserRequiredName>>,
+  Expect<Equal<RequiredByKeys<User, 'name' | 'age'>, UserRequiredNameAndAge>>,
+  Expect<Equal<RequiredByKeys<User>, Required<User>>>,
+  // @ts-expect-error
+  Expect<Equal<RequiredByKeys<User, 'name' | 'unknown'>, UserRequiredName>>,
 ]
