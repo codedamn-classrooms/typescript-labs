@@ -1,2 +1,3 @@
 tabs: ['script.ts']
+terminals: ['bun install']
 run-button: ['tsc --noEmit script.ts']
