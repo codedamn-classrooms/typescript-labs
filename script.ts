@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type LookUp<U, T> = any
 
 
 /* Write your code above */
@@ -10,10 +10,20 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+interface Cat {
+  type: 'cat'
+  breeds: 'Abyssinian' | 'Shorthair' | 'Curl' | 'Bengal'
+}
+
+interface Dog {
+  type: 'dog'
+  breeds: 'Hound' | 'Brittany' | 'Bulldog' | 'Boxer'
+  color: 'brown' | 'white' | 'black'
+}
+
+type Animal = Cat | Dog
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<LookUp<Animal, 'dog'>, Dog>>,
+  Expect<Equal<LookUp<Animal, 'cat'>, Cat>>,
 ]
