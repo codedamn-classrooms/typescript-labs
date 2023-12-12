@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type IsTuple<T> = any
 
 
 /* Write your code above */
@@ -11,9 +11,10 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<IsTuple<[]>, true>>,
+  Expect<Equal<IsTuple<[number]>, true>>,
+  Expect<Equal<IsTuple<readonly [1]>, true>>,
+  Expect<Equal<IsTuple<{ length: 1 }>, false>>,
+  Expect<Equal<IsTuple<number[]>, false>>,
+  Expect<Equal<IsTuple<never>, false>>,
 ]
