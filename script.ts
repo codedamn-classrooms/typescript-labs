@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type MyReadonly2<T, K> = any
 
 
 /* Write your code above */
@@ -8,12 +8,32 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Alike, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
+  Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
+  Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
+  Expect<Alike<MyReadonly2<Todo2, 'description' >, Expected>>,
 ]
+
+// @ts-expect-error
+type error = MyReadonly2<Todo1, 'title' | 'invalid'>
+
+interface Todo1 {
+  title: string
+  description?: string
+  completed: boolean
+}
+
+interface Todo2 {
+  readonly title: string
+  description?: string
+  completed: boolean
+}
+
+interface Expected {
+  readonly title: string
+  readonly description?: string
+  completed: boolean
+}
