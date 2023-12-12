@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type IndexOf<T, U> = any
 
 
 /* Write your code above */
@@ -11,9 +11,11 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<IndexOf<[1, 2, 3], 2>, 1>>,
+  Expect<Equal<IndexOf<[2, 6, 3, 8, 4, 1, 7, 3, 9], 3>, 2>>,
+  Expect<Equal<IndexOf<[0, 0, 0], 2>, -1>>,
+  Expect<Equal<IndexOf<[string, 1, number, 'a'], number>, 2>>,
+  Expect<Equal<IndexOf<[string, 1, number, 'a', any], any>, 4>>,
+  Expect<Equal<IndexOf<[string, 'a'], 'a'>, 1>>,
+  Expect<Equal<IndexOf<[any, 1], 1>, 1>>,
 ]
