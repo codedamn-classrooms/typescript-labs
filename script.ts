@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Slice<Arr, Start, End> = any
 
 
 /* Write your code above */
@@ -10,10 +10,26 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+type Arr = [1, 2, 3, 4, 5]
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  // basic
+  Expect<Equal<Slice<Arr, 0, 1>, [1]>>,
+  Expect<Equal<Slice<Arr, 0, 0>, []>>,
+  Expect<Equal<Slice<Arr, 2, 4>, [3, 4]>>,
+
+  // optional args
+  Expect<Equal<Slice<[]>, []>>,
+  Expect<Equal<Slice<Arr>, Arr>>,
+  Expect<Equal<Slice<Arr, 0>, Arr>>,
+  Expect<Equal<Slice<Arr, 2>, [3, 4, 5]>>,
+
+  // negative index
+  Expect<Equal<Slice<Arr, 0, -1>, [1, 2, 3, 4]>>,
+  Expect<Equal<Slice<Arr, -3, -1>, [3, 4]>>,
+
+  // invalid
+  Expect<Equal<Slice<Arr, 10>, []>>,
+  Expect<Equal<Slice<Arr, 1, 0>, []>>,
+  Expect<Equal<Slice<Arr, 10, 20>, []>>,
 ]
