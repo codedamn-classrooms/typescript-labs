@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Join<T, U> = any
 
 
 /* Write your code above */
@@ -11,9 +11,9 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Join<['a', 'p', 'p', 'l', 'e'], '-'>, 'a-p-p-l-e'>>,
+  Expect<Equal<Join<['Hello', 'World'], ' '>, 'Hello World'>>,
+  Expect<Equal<Join<['2', '2', '2'], 1>, '21212'>>,
+  Expect<Equal<Join<['o'], 'u'>, 'o'>>,
+  Expect<Equal<Join<[], 'u'>, ''>>,
 ]
