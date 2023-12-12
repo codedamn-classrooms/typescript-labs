@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type AppendToObject<T, U, V> = any
 
 
 /* Write your code above */
@@ -10,10 +10,45 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+type test1 = {
+  key: 'cat'
+  value: 'green'
+}
+
+type testExpect1 = {
+  key: 'cat'
+  value: 'green'
+  home: boolean
+}
+
+type test2 = {
+  key: 'dog' | undefined
+  value: 'white'
+  sun: true
+}
+
+type testExpect2 = {
+  key: 'dog' | undefined
+  value: 'white'
+  sun: true
+  home: 1
+}
+
+type test3 = {
+  key: 'cow'
+  value: 'yellow'
+  sun: false
+}
+
+type testExpect3 = {
+  key: 'cow'
+  value: 'yellow'
+  sun: false
+  moon: false | undefined
+}
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<AppendToObject<test1, 'home', boolean>, testExpect1>>,
+  Expect<Equal<AppendToObject<test2, 'home', 1>, testExpect2>>,
+  Expect<Equal<AppendToObject<test3, 'moon', false | undefined>, testExpect3>>,
 ]
