@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type PartialByKeys<T, K> = any
 
 
 /* Write your code above */
@@ -10,10 +10,28 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+interface User {
+  name: string
+  age: number
+  address: string
+}
+
+interface UserPartialName {
+  name?: string
+  age: number
+  address: string
+}
+
+interface UserPartialNameAndAge {
+  name?: string
+  age?: number
+  address: string
+}
+
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<PartialByKeys<User, 'name'>, UserPartialName>>,
+  Expect<Equal<PartialByKeys<User, 'name' | 'age'>, UserPartialNameAndAge>>,
+  Expect<Equal<PartialByKeys<User>, Partial<User>>>,
+  // @ts-expect-error
+  Expect<Equal<PartialByKeys<User, 'name' | 'unknown'>, UserPartialName>>,
 ]
