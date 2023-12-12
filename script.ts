@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type MyReturnType<T> = any
 
 
 /* Write your code above */
@@ -11,9 +11,20 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<string, MyReturnType<() => string>>>,
+  Expect<Equal<123, MyReturnType<() => 123>>>,
+  Expect<Equal<ComplexObject, MyReturnType<() => ComplexObject>>>,
+  Expect<Equal<Promise<boolean>, MyReturnType<() => Promise<boolean>>>>,
+  Expect<Equal<() => 'foo', MyReturnType<() => () => 'foo'>>>,
+  Expect<Equal<1 | 2, MyReturnType<typeof fn>>>,
+  Expect<Equal<1 | 2, MyReturnType<typeof fn1>>>,
 ]
+
+type ComplexObject = {
+  a: [12, 'foo']
+  bar: 'hello'
+  prev(): number
+}
+
+const fn = (v: boolean) => v ? 1 : 2
+const fn1 = (v: boolean, w: any) => v ? 1 : 2
