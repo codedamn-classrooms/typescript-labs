@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Square<N extends number> = number
 
 
 /* Write your code above */
@@ -11,9 +11,15 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Square<0>, 0>>,
+  Expect<Equal<Square<1>, 1>>,
+  Expect<Equal<Square<3>, 9>>,
+  Expect<Equal<Square<20>, 400>>,
+  Expect<Equal<Square<100>, 10000>>,
+
+  // Negative numbers
+  Expect<Equal<Square<-2>, 4>>,
+  Expect<Equal<Square<-5>, 25>>,
+  Expect<Equal<Square<-31>, 961>>,
+  Expect<Equal<Square<-50>, 2500>>,
 ]
