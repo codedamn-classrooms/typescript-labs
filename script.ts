@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Reverse<T> = any
 
 
 /* Write your code above */
@@ -11,9 +11,14 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Reverse<[]>, []>>,
+  Expect<Equal<Reverse<['a', 'b']>, ['b', 'a']>>,
+  Expect<Equal<Reverse<['a', 'b', 'c']>, ['c', 'b', 'a']>>,
+]
+
+type errors = [
+  // @ts-expect-error
+  Reverse<'string'>,
+  // @ts-expect-error
+  Reverse<{ key: 'value' }>,
 ]
