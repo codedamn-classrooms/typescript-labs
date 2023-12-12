@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+declare function VueBasicProps(options: any): any
 
 
 /* Write your code above */
@@ -8,12 +8,63 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Debug, Equal, Expect, IsAny } from '@type-challenges/utils'
 
-type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
-]
+class ClassA {}
+
+VueBasicProps({
+  props: {
+    propA: {},
+    propB: { type: String },
+    propC: { type: Boolean },
+    propD: { type: ClassA },
+    propE: { type: [String, Number] },
+    propF: RegExp,
+  },
+  data(this) {
+    type PropsType = Debug<typeof this>
+    type cases = [
+      Expect<IsAny<PropsType['propA']>>,
+      Expect<Equal<PropsType['propB'], string>>,
+      Expect<Equal<PropsType['propC'], boolean>>,
+      Expect<Equal<PropsType['propD'], ClassA>>,
+      Expect<Equal<PropsType['propE'], string | number>>,
+      Expect<Equal<PropsType['propF'], RegExp>>,
+    ]
+
+    // @ts-expect-error
+    this.firstname
+    // @ts-expect-error
+    this.getRandom()
+    // @ts-expect-error
+    this.data()
+
+    return {
+      firstname: 'Type',
+      lastname: 'Challenges',
+      amount: 10,
+    }
+  },
+  computed: {
+    fullname() {
+      return `${this.firstname} ${this.lastname}`
+    },
+  },
+  methods: {
+    getRandom() {
+      return Math.random()
+    },
+    hi() {
+      alert(this.fullname.toLowerCase())
+      alert(this.getRandom())
+    },
+    test() {
+      const fullname = this.fullname
+      const propE = this.propE
+      type cases = [
+        Expect<Equal<typeof fullname, string>>,
+        Expect<Equal<typeof propE, string | number>>,
+      ]
+    },
+  },
+})
