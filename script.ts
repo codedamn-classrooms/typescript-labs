@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Transpose<M extends number[][]> = any
 
 
 /* Write your code above */
@@ -9,11 +9,14 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
+import { ExpectFalse, NotEqual } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Transpose<[]>, []>>,
+  Expect<Equal<Transpose<[[1]]>, [[1]]>>,
+  Expect<Equal<Transpose<[[1, 2]]>, [[1], [2]]>>,
+  Expect<Equal<Transpose<[[1, 2], [3, 4]]>, [[1, 3], [2, 4]]>>,
+  Expect<Equal<Transpose<[[1, 2, 3], [4, 5, 6]]>, [[1, 4], [2, 5], [3, 6]]>>,
+  Expect<Equal<Transpose<[[1, 4], [2, 5], [3, 6]]>, [[1, 2, 3], [4, 5, 6]]>>,
+  Expect<Equal<Transpose<[[1, 2, 3], [4, 5, 6], [7, 8, 9]]>, [[1, 4, 7], [2, 5, 8], [3, 6, 9]]>>,
 ]
