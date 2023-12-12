@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type ObjectKeyPaths<T extends object> = any
 
 
 /* Write your code above */
@@ -8,12 +8,47 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, Expect, ExpectExtends } from '@type-challenges/utils'
+
+const ref = {
+  count: 1,
+  person: {
+    name: 'cattchen',
+    age: 22,
+    books: ['book1', 'book2'],
+    pets: [
+      {
+        type: 'cat',
+      },
+    ],
+  },
+}
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<ObjectKeyPaths<{ name: string; age: number }>, 'name' | 'age'>>,
+  Expect<
+  Equal<
+  ObjectKeyPaths<{
+    refCount: number
+    person: { name: string; age: number }
+  }>,
+  'refCount' | 'person' | 'person.name' | 'person.age'
+  >
+  >,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'count'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.name'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.age'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.books'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.pets'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.books.0'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.books.1'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.books[0]'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.books.[0]'>>,
+  Expect<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.pets.0.type'>>,
+  Expect<Equal<ExpectExtends<ObjectKeyPaths<typeof ref>, 'notExist'>, false>>,
+  Expect<Equal<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.notExist'>, false>>,
+  Expect<Equal<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.name.'>, false>>,
+  Expect<Equal<ExpectExtends<ObjectKeyPaths<typeof ref>, '.person.name'>, false>>,
+  Expect<Equal<ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.pets.[0]type'>, false>>,
 ]
