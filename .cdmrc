@@ -1,0 +1,2 @@
+tabs: ['script.ts']
+run-button: ['tsc --noEmit script.ts']
