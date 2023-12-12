@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type FindAll<T extends string, P extends string> = any
 
 
 /* Write your code above */
@@ -11,9 +11,11 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<FindAll<'Collection of TypeScript type challenges', 'Type'>, [14]>>,
+  Expect<Equal<FindAll<'Collection of TypeScript type challenges', 'pe'>, [16, 27]>>,
+  Expect<Equal<FindAll<'Collection of TypeScript type challenges', ''>, []>>,
+  Expect<Equal<FindAll<'', 'Type'>, []>>,
+  Expect<Equal<FindAll<'', ''>, []>>,
+  Expect<Equal<FindAll<'AAAA', 'A'>, [0, 1, 2, 3]>>,
+  Expect<Equal<FindAll<'AAAA', 'AA'>, [0, 1, 2]>>,
 ]
