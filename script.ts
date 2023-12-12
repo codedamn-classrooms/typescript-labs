@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type BinaryToDecimal<S extends string> = any
 
 
 /* Write your code above */
@@ -11,9 +11,9 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<BinaryToDecimal<'10'>, 2>>,
+  Expect<Equal<BinaryToDecimal<'0011'>, 3>>,
+  Expect<Equal<BinaryToDecimal<'00000000'>, 0>>,
+  Expect<Equal<BinaryToDecimal<'11111111'>, 255>>,
+  Expect<Equal<BinaryToDecimal<'10101010'>, 170>>,
 ]
