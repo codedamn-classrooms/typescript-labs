@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type DropString<S, R> = any
 
 
 /* Write your code above */
@@ -11,9 +11,14 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<DropString<'butter fly!', ''>, 'butter fly!'>>,
+  Expect<Equal<DropString<'butter fly!', ' '>, 'butterfly!'>>,
+  Expect<Equal<DropString<'butter fly!', 'but'>, 'er fly!'>>,
+  Expect<Equal<DropString<' b u t t e r f l y ! ', 'but'>, '     e r f l y ! '>>,
+  Expect<Equal<DropString<'    butter fly!        ', ' '>, 'butterfly!'>>,
+  Expect<Equal<DropString<' b u t t e r f l y ! ', ' '>, 'butterfly!'>>,
+  Expect<Equal<DropString<' b u t t e r f l y ! ', 'but'>, '     e r f l y ! '>>,
+  Expect<Equal<DropString<' b u t t e r f l y ! ', 'tub'>, '     e r f l y ! '>>,
+  Expect<Equal<DropString<' b u t t e r f l y ! ', 'b'>, '  u t t e r f l y ! '>>,
+  Expect<Equal<DropString<' b u t t e r f l y ! ', 't'>, ' b u   e r f l y ! '>>,
 ]
