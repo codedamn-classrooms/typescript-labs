@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type PermutationsOfTuple<T extends unknown[]> = any
 
 
 /* Write your code above */
@@ -8,12 +8,29 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, Expect, ExpectFalse } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<PermutationsOfTuple<[]>, []>>,
+  Expect<Equal<PermutationsOfTuple<[any]>, [any]>>,
+  Expect<Equal<PermutationsOfTuple<[any, unknown]>, [any, unknown] | [unknown, any]>>,
+  Expect<Equal<
+    PermutationsOfTuple<[any, unknown, never]>,
+    | [any, unknown, never]
+    | [unknown, any, never]
+    | [unknown, never, any]
+    | [any, never, unknown]
+    | [never, any, unknown]
+    | [never, unknown, any]
+  >>,
+  Expect<Equal<
+    PermutationsOfTuple<[1, number, unknown]>,
+    | [1, number, unknown]
+    | [1, unknown, number]
+    | [number, 1, unknown]
+    | [unknown, 1, number]
+    | [number, unknown, 1]
+    | [unknown, number, 1]
+  >>,
+  ExpectFalse<Equal<PermutationsOfTuple<[ 1, number, unknown ]>, [unknown]>>,
 ]
