@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type Format<T extends string> = any
 
 
 /* Write your code above */
@@ -11,9 +11,10 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  Expect<Equal<Format<'abc'>, string>>,
+  Expect<Equal<Format<'a%sbc'>, (s1: string) => string>>,
+  Expect<Equal<Format<'a%dbc'>, (d1: number) => string>>,
+  Expect<Equal<Format<'a%%dbc'>, string>>,
+  Expect<Equal<Format<'a%%%dbc'>, (d1: number) => string>>,
+  Expect<Equal<Format<'a%dbc%s'>, (d1: number) => (s1: string) => string>>,
 ]
