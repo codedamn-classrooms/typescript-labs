@@ -1,6 +1,6 @@
 /* Write your code below */
 
-type BitwiseXOR<S1 extends string, S2 extends string> = any
+type DeepObjectToUniq<O extends object> = any
 
 
 /* Write your code above */
@@ -8,12 +8,31 @@ type BitwiseXOR<S1 extends string, S2 extends string> = any
 
 
 /* There should be no error in the test cases below */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, IsFalse, IsTrue } from '@type-challenges/utils'
+
+type Quz = { quz: 4 }
+
+type Foo = { foo: 2; baz: Quz; bar: Quz }
+type Bar = { foo: 2; baz: Quz; bar: Quz & { quzz?: 0 } }
+
+type UniqQuz = DeepObjectToUniq<Quz>
+type UniqFoo = DeepObjectToUniq<Foo>
+type UniqBar = DeepObjectToUniq<Bar>
+
+declare let foo: Foo
+declare let uniqFoo: UniqFoo
+
+uniqFoo = foo
+foo = uniqFoo
 
 type cases = [
-  Expect<Equal<BitwiseXOR<'0', '1'>, '1'>>,
-  Expect<Equal<BitwiseXOR<'1', '1'>, '0'>>,
-  Expect<Equal<BitwiseXOR<'10', '1'>, '11'>>,
-  Expect<Equal<BitwiseXOR<'110', '1'>, '111'>>,
-  Expect<Equal<BitwiseXOR<'101', '11'>, '110'>>,
+  IsFalse<Equal<UniqQuz, Quz>>,
+  IsFalse<Equal<UniqFoo, Foo>>,
+  IsTrue<Equal<UniqFoo['foo'], Foo['foo']>>,
+  IsTrue<Equal<UniqFoo['bar']['quz'], Foo['bar']['quz']>>,
+  IsFalse<Equal<UniqQuz, UniqFoo['baz']>>,
+  IsFalse<Equal<UniqFoo['bar'], UniqFoo['baz']>>,
+  IsFalse<Equal<UniqBar['baz'], UniqFoo['baz']>>,
+  IsTrue<Equal<keyof UniqBar['baz'], keyof UniqFoo['baz']>>,
+  IsTrue<Equal<keyof Foo, keyof UniqFoo & string>>,
 ]
