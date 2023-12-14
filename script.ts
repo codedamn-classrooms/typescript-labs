@@ -1,6 +1,6 @@
 /* Write your code below */
 
-// 实现 Combs
+
 type Combs<T extends any[]> = any
 
 
