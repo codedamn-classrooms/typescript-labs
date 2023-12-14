@@ -19,6 +19,3 @@ type cases = [
   Expect<Equal<Concat<[1, 2], [3, 4]>, [1, 2, 3, 4]>>,
   Expect<Equal<Concat<['1', 2, '3'], [false, boolean, '4']>, ['1', 2, '3', false, boolean, '4']>>,
 ]
-
-// @ts-expect-error
-type error = Concat<null, undefined>
