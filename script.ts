@@ -17,12 +17,8 @@ type cases = [
 ]
 
 type errors = [
-  // @ts-expect-error
   FlipArguments<'string'>,
-  // @ts-expect-error
   FlipArguments<{ key: 'value' }>,
-  // @ts-expect-error
   FlipArguments<['apple', 'banana', 100, { a: 1 }]>,
-  // @ts-expect-error
   FlipArguments<null | undefined>,
 ]
