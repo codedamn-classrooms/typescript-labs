@@ -29,7 +29,6 @@ const result2 = a
 
 const result3 = a
   .option('name', 'another name')
-  // @ts-expect-error
   .option('name', 123)
   .get()
 
