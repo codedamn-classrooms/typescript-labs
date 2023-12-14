@@ -9,7 +9,6 @@ type CheckRepeatedTuple<T extends unknown[]> = any
 
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
-import { ExpectFalse, NotEqual } from '@type-challenges/utils'
 
 type cases = [
   Expect<Equal<CheckRepeatedTuple<[number, number, string, boolean]>, true>>,
