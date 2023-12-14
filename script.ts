@@ -1,6 +1,6 @@
 /* Write your code below */
 
-function assertArrayIndex(array: readonly unknown[], key: string) {}
+function assertArrayIndex(array: readonly unknown[], key: string) { }
 
 type Index<Array> = any
 
@@ -23,7 +23,6 @@ let sum = 0
 for (let i = 0 as Index<typeof matrix>; i < matrix.length; i += 1) {
   const columns: number[] = matrix[i]
 
-  // @ts-expect-error: number | undefined in not assignable to number
   const x: number[] = matrix[0]
 
   assertArrayIndex(columns, 'columns')
@@ -31,13 +30,10 @@ for (let i = 0 as Index<typeof matrix>; i < matrix.length; i += 1) {
   for (let j = 0 as Index<typeof columns>; j < columns.length; j += 1) {
     sum += columns[j]
 
-    // @ts-expect-error: number | undefined in not assignable to number
     const y: number = columns[i]
 
-    // @ts-expect-error: number | undefined in not assignable to number
     const z: number = columns[0]
 
-    // @ts-expect-error: number[] | undefined in not assignable to number[]
     const u: number[] = matrix[j]
   }
 }
@@ -49,7 +45,6 @@ assertArrayIndex(a, 'a')
 for (let p = 0 as Index<typeof a>; p < a.length; p += 1) {
   const value: string = a[p]
 
-  // @ts-expect-error: string | undefined is not assignable to string
   const z: string = a[2]
 }
 
@@ -75,10 +70,8 @@ const c: string[] = []
 assertArrayIndex(c, 'c')
 
 for (let p = 0; p < c.length; p += 1) {
-  // @ts-expect-error: string | undefined is not assignable to string
   let value: string = c[p]
 
-  // @ts-expect-error: string | undefined is not assignable to string
   value = c[0 as Index<typeof a>]
 }
 
