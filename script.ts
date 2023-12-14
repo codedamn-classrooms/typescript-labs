@@ -9,7 +9,6 @@ type Integer<T> = any
 
 /* There should be no error in the test cases below */
 import type { Equal, Expect } from '@type-challenges/utils'
-import { ExpectFalse, NotEqual } from '@type-challenges/utils'
 
 let x = 1
 let y = 1 as const
