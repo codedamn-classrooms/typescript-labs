@@ -27,8 +27,6 @@ type cases = [
 ]
 
 type errors = [
-  // @ts-expect-error
   Mutable<'string'>,
-  // @ts-expect-error
   Mutable<0>,
 ]
